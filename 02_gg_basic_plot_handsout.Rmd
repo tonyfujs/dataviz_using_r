@@ -24,8 +24,13 @@ ggplot(
 ```{r, echo = FALSE, fig.margin = TRUE, fig.cap = "Population vs Stores"}
 ggplot(aes(x = population, y = stores), data = summary2005) + geom_point() + theme_few()
 ```
-
-
+.   
+.   
+.   
+.   
+.   
+.   
+.     
 ## Scatter Plot: Add regression line
 ```{r, eval=FALSE}
 ggplot(
@@ -38,8 +43,14 @@ ggplot(
 ```{r, echo = FALSE, fig.margin = TRUE, fig.cap = "Population vs Stores"}
 ggplot(aes(x = population, y = stores), data = summary2005) + geom_point() + geom_smooth() + theme_few()
 ```
-
-
+    
+.   
+.   
+.   
+.   
+.   
+.   
+.    
 ## Bubble plot: Bubble size represents market_share
 ```{r, eval=FALSE}
 ggplot(
@@ -52,15 +63,19 @@ ggplot(
 ```{r, echo = FALSE, fig.margin = TRUE, fig.cap = "Bubble plot"}
 ggplot(aes(x = population, y = stores, size = market_share), data = summary2005) + geom_point() + theme_few()
 ```
+    
+bla bla              
+         
+         
+         
+         
+         
+         
+         
+     
+bla bla     
 
 
-
-## Bar chart: Unordered
-```{r, ggplot(
-  aes(x = state,
-      y = population),
-  data = summary2005) +
-  geom_bar(stat = 'identity')
 
 
 [^tufte_latex]: https://code.google.com/p/tufte-latex/
