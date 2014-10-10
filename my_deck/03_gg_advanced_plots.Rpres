@@ -1,0 +1,533 @@
+R you ready to ggplot2?
+========================================================
+author: Advanced Plots
+transition: rotate
+transition-speed: slow
+width: 1440
+height: 900
+incremental: true
+date: `r format(Sys.Date(), format="%B %d, %Y")`
+css: ./theme/my_style.css
+
+<small> Tony Fujs </small>
+
+```{r setup, echo=FALSE}
+library(knitr)
+library(highlight)
+library(ggplot2)
+library(ggthemes)
+library(scales)
+opts_chunk$set(cache = TRUE, fig.align = 'right')
+#options(digits = 2, tidy.opts=list(width=500))
+#wd <- setwd("C:/Users/tony/Dropbox/[Miscellaneous]/Presentations/EERS/EERS 2014/ggplot_workshop")
+#opts_knit$set(root.dir = wd)
+load('../data/data.Rdata')
+```
+
+Minard: Troops data set
+====================================
+incremental: false
+
+```{r, echo = FALSE}
+print(troops[1:5 ,], row.names = FALSE)
+```
+
+Minard: Iteration 1
+====================================
+incremental: false
+left: 55%
+
+Plot troups location over time with a line
+
+```{r, eval = FALSE}
+ggplot() +
+geom_path(
+  aes(x = long,
+      y = lat,
+      group = group),
+  data = troops)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group),
+  data = troops)
+```
+
+Minard: Iteration 2
+====================================
+incremental: false
+left: 55%
+
+Add color to show direction of the troups
+
+```{r, eval = FALSE}
+# EDIT CODE
+ggplot() +
+geom_path(
+  aes(x = long,
+      y = lat,
+      group = group),
+  data = troops)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction),
+  data = troops)
+```
+
+
+Minard: Iteration 2
+====================================
+incremental: false
+left: 55%
+
+Add color to show direction of the troups
+
+```{r, eval = FALSE}
+ggplot() +
+geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction),
+  data = troops)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction),
+  data = troops)
+```
+
+Minard: Iteration 3
+====================================
+incremental: false
+left: 55%
+
+Adjust line size to show number of survivors
+
+```{r, eval = FALSE}
+# EDIT CODE
+ggplot() +
+geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction),
+  data = troops)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops,
+  lineend = 'round')
+```
+
+
+Minard: Iteration 3
+====================================
+incremental: false
+left: 55%
+
+Adjust line size to show number of survivors
+
+```{r, eval = FALSE}
+ggplot() +
+geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops,
+  lineend = 'round')
+```
+
+
+Minard: Data set
+====================================
+incremental: false
+
+```{r, echo = FALSE}
+print(cities[1:5 ,], row.names = FALSE)
+```
+
+
+Minard: Iteration 4
+====================================
+incremental: false
+left: 55%
+
+Add cities on the plot (One point for each city)
+
+```{r, eval = FALSE}
+# EDIT CODE (You must add a complete layer)
+ggplot() +
+geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops,
+  lineend = 'round') +
+  geom_point(
+    aes(
+      x = long,
+      y = lat),
+    data = cities)
+```
+
+
+Minard: Iteration 4
+====================================
+incremental: false
+left: 55%
+
+Add cities on the plot (One point for each city)
+
+```{r, eval = FALSE}
+# EDIT CODE (You must add a complete layer)
+ggplot() +
+geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops) +
+geom_point(
+    aes(
+      x = long,
+      y = lat),
+    data = cities)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops,
+  lineend = 'round') +
+  geom_point(
+    aes(
+      x = long,
+      y = lat),
+    data = cities)
+```
+
+
+Minard: Iteration 5
+====================================
+incremental: false
+left: 55%
+
+Add city names on the plot beside each corresponding point
+
+```{r, eval = FALSE}
+# EDIT CODE (You must add a complete layer)
+ggplot() +
+geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops) +
+geom_point(
+    aes(
+      x = long,
+      y = lat),
+    data = cities)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops,
+  lineend = 'round') +
+  geom_point(
+    aes(
+      x = long,
+      y = lat),
+    data = cities) +
+	geom_text(
+		aes(x = long, y = lat, label = city),
+		data = cities)
+```
+
+
+Minard: Iteration 5
+====================================
+incremental: false
+left: 55%
+
+Add city names: Something wrong with the labels?
+
+```{r, eval = FALSE}
+# Something wrong??
+ggplot() +
+geom_path(XXXX) +
+geom_point(XXXX) +
+geom_text(
+		aes(x = long,
+				y = lat,
+				label = city),
+		data = cities)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops,
+  lineend = 'round') +
+  geom_point(
+    aes(
+      x = long,
+      y = lat),
+    data = cities) +
+	geom_text(
+		aes(x = long, y = lat, label = city),
+		data = cities)
+```
+
+Minard: Iteration 5
+====================================
+incremental: false
+left: 55%
+
+Add city names: Deal with overlapping
+
+```{r, eval = FALSE}
+ggplot() +
+geom_path(XXXX) +
+geom_point(XXXX) +
+geom_text(
+		aes(x = long,
+				y = lat - 0.03,
+				label = city),
+		data = cities)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops,
+  lineend = 'round') +
+  geom_point(
+    aes(
+      x = long,
+      y = lat),
+    data = cities) +
+	geom_text(
+		aes(x = long, y = lat - 0.03, label = city),
+		data = cities)
+```
+
+
+Minard: Iteration 5
+====================================
+incremental: false
+left: 55%
+
+Add city names: Reduce font size
+* (Difference between setting size inside or outside aes())
+
+```{r, eval = FALSE}
+ggplot() +
+geom_path(XXXX) +
+geom_point(XXXX) +
+geom_text(
+		aes(x = long,
+				y = lat - 0.03,
+				label = city),
+		size = 4,
+		data = cities)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops,
+  lineend = 'round') +
+  geom_point(
+    aes(
+      x = long,
+      y = lat),
+    data = cities) +
+	geom_text(
+		aes(x = long, y = lat - 0.03, label = city),
+		size = 4,
+		data = cities)
+```
+
+
+Minard: Iteration 6
+====================================
+incremental: false
+left: 55%
+
+Customize the line colors
+
+```{r, eval = FALSE}
+# Which component of the gg does control the line colors?
+ggplot() +
+geom_path(XXXX) +
+geom_point(XXXX) +
+geom_text() +
+?????
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops,
+  lineend = 'round') +
+  geom_point(
+    aes(
+      x = long,
+      y = lat),
+    data = cities) +
+	geom_text(
+		aes(x = long, y = lat - 0.03, label = city),
+		size = 4,
+		data = cities) +
+	scale_color_manual(values = c('grey50','red'))
+```
+
+
+
+Minard: Iteration 6
+====================================
+incremental: false
+left: 55%
+
+Customize the line colors
+
+```{r, eval = FALSE}
+# Which component of the gg does control the line colors?
+ggplot() +
+geom_path(XXXX) +
+geom_point(XXXX) +
+geom_text() +
+scale_color_manual(
+  values = c('grey50','red'))
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot() +
+  geom_path(
+  aes(x = long,
+      y = lat,
+      group = group,
+      color = direction,
+      size = survivors),
+  data = troops,
+  lineend = 'round') +
+  geom_point(
+    aes(
+      x = long,
+      y = lat),
+    data = cities) +
+	geom_text(
+		aes(x = long, y = lat - 0.03, label = city),
+		size = 4,
+		data = cities) +
+	scale_color_manual(values = c('grey50','red'))
+```

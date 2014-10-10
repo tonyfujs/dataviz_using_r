@@ -1,0 +1,620 @@
+R you ready to ggplot2?
+========================================================
+author: Basic Plots
+transition: rotate
+transition-speed: slow
+width: 1440
+height: 900
+incremental: true
+date: `r format(Sys.Date(), format="%B %d, %Y")`
+css: ./theme/my_style.css
+
+<small> Tony Fujs </small>
+
+```{r setup, echo=FALSE}
+library(knitr)
+library(highlight)
+library(ggplot2)
+library(ggthemes)
+library(scales)
+opts_chunk$set(cache = TRUE, fig.align = 'right')
+#options(digits = 2, tidy.opts=list(width=500))
+#wd <- setwd("C:/Users/tony/Dropbox/[Miscellaneous]/Presentations/EERS/EERS 2014/ggplot_workshop")
+#opts_knit$set(root.dir = wd)
+load('../data/data.Rdata')
+```
+
+Rstudio
+====================================
+
+![](./tof/rstudio.png)
+
+
+
+LET'S PLAY WITH CODE!!
+====================================
+incremental: true
+
+* Open the 02_basic_plots.R file
+* Edit ONLY the XXXX
+
+Data set
+====================================
+incremental: false
+
+```{r, echo = FALSE}
+print(summary2005[1:5 ,2:4], row.names = FALSE)
+```
+
+Scatter plot
+====================================
+left: 55%
+
+```{r, eval = FALSE}
+# population vs stores
+ggplot(
+aes(x = XXXX, 
+    y = XXXX),
+data = summary2005) +
+geom_point() 
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = population, y = stores),
+  data = summary2005) +
+  geom_point() 
+```
+
+
+Scatter plot
+====================================
+left: 55%
+incremental: false
+
+```{r, eval = FALSE}
+# population vs stores
+ggplot(
+aes(x = population, 
+    y = stores),
+data = summary2005) +
+geom_point() 
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = population, y = stores),
+  data = summary2005) +
+  geom_point() 
+```
+
+
+Scatter plot + regression line
+====================================
+left: 55%
+
+```{r, eval = FALSE}
+# Complete code to add a regression line
+# Hint: Use the cheat sheet to find the right geom
+ggplot(
+aes(x = population,
+    y = stores),
+data = summary2005) +
+geom_point() +
+geom_XXXX
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = population, y = stores),
+  data = summary2005) +
+  geom_point() +
+  geom_smooth()
+```
+
+
+Scatter plot + regression line
+====================================
+left: 55%
+incremental: false
+
+```{r, eval = FALSE}
+# Complete code to add a regression line
+# Hint use the cheat sheet
+ggplot(
+aes(x = population,
+    y = stores),
+data = summary2005) +
+geom_point() +
+geom_smooth()
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = population, y = stores),
+  data = summary2005) +
+  geom_point() +
+  geom_smooth()
+```
+
+
+Layered plots
+====================================
+incremental: false
+left: 60%
+
+New plots elements are added using the plus sign
+
+```{r, eval = FALSE}
+ggplot(...) +
+geom_point() +
+geom_smooth() +
+scale_y_continuous() +
+coord_polar()
+```
+
+***
+
+![](./tof/plus.jpg)
+
+
+Bubble chart
+====================================
+left: 55%
+
+```{r, eval = FALSE}
+# Bubbles represent market_share 
+ggplot(
+  aes(x = population, 
+      y = stores,
+      XXXX = market_share),
+  data = summary2005) +
+  geom_point()
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = population, y = stores,
+      size = market_share),
+  data = summary2005) +
+  geom_point()
+```
+
+
+Bubble chart
+====================================
+left: 55%
+incremental: false
+
+```{r, eval = FALSE}
+# Bubbles represent market_share
+ggplot(
+  aes(x = population, 
+      y = stores,
+      size = market_share),
+  data = summary2005) +
+  geom_point()
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = population, y = stores,
+      size = market_share),
+  data = summary2005) +
+  geom_point()
+```
+
+
+
+Bar chart - Unordered
+====================================
+left: 55%
+
+```{r, eval = FALSE}
+ggplot(
+  aes(x = state,
+      y = population),
+  data = summary2005) +
+  geom_bar(stat = 'identity')
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = state,
+      y = population),
+  data = summary2005) +
+  geom_bar(stat = 'identity')
+```
+
+
+Bar chart - ordered
+====================================
+left: 55%
+
+```{r, eval = FALSE}
+ggplot(
+  aes(x = reorder(state, population),
+      y = population),
+  data = summary2005) +
+  geom_bar(stat = 'identity')
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = reorder(state, population),
+      y = population),
+  data = summary2005) +
+  geom_bar(stat = 'identity')
+```
+
+
+Bar chart - ordered & flipped
+====================================
+left: 55%
+
+```{r, eval = FALSE}
+# Update code to flip this bar chart (States will show vertically)
+ggplot(
+  aes(x = reorder(state, population),
+      y = population),
+  data = summary2005) +
+  geom_bar(stat = 'identity') +
+  coord_XXXX
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = reorder(state, population),
+      y = population),
+  data = summary2005) +
+  geom_bar(stat = 'identity') +
+  coord_flip()
+```
+
+
+Bar chart - ordered & flipped
+====================================
+left: 55%
+incremental: false
+
+```{r, eval = FALSE}
+# Update code to flip this bar chart (States will show vertically)
+ggplot(
+  aes(x = reorder(state, population),
+      y = population),
+  data = summary2005) +
+  geom_bar(stat = 'identity') +
+  coord_flip()
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = reorder(state, population),
+      y = population),
+  data = summary2005) +
+  geom_bar(stat = 'identity') +
+  coord_flip()
+```
+
+
+TAKE A GUESS!!
+====================================
+type: practice
+left: 65%
+incremental: false
+
+```{r, eval = FALSE}
+# WHY CAN'T WE JUST SWITCH AESTHETICS??
+ggplot(
+  aes(x = population),
+      y = reorder(state, population)),
+  data = summary2005) +
+  geom_bar(stat = 'identity')
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = reorder(state, population),
+      y = population),
+  data = summary2005) +
+  geom_bar(stat = 'identity') +
+  coord_flip()
+```
+
+DATASET
+====================================
+incremental: false
+
+```{r, echo = FALSE}
+print(summary95_05[1:5 ,1:4], row.names = FALSE)
+print(summary95_05[(nrow(summary95_05)-5):(nrow(summary95_05)),1:4], row.names = FALSE)
+```
+
+Bar chart - continued
+====================================
+left: 55%
+
+```{r, eval = FALSE}
+# Update the code so each bar represents the total population of the US for each year
+ggplot(
+aes(x = factor(year),
+    y = population),
+data = summary95_05) +
+geom_bar(stat = 'identity',
+         position = 'identity')
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = factor(year),
+      y = population),
+  data = summary95_05) +
+  geom_bar(stat = 'identity',
+           position = 'identity') +
+  scale_y_continuous(labels = comma)
+```
+
+
+Bar chart - continued
+====================================
+left: 55%
+incremental: false
+
+```{r, eval = FALSE}
+ggplot(
+aes(x = factor(year),
+    y = population),
+data = summary95_05) +
+geom_bar(stat = 'identity',
+         position = 'stack')
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+aes(x = factor(year),
+      y = population),
+  data = summary95_05) +
+  geom_bar(stat = 'identity',
+           position = 'stack') +
+  scale_y_continuous(labels = comma)
+```
+
+
+DATASET
+====================================
+incremental: false
+
+```{r, echo = FALSE}
+print(summary[1:5 ,1:4], row.names = FALSE)
+print(summary[(nrow(summary)-5):(nrow(summary)),1:4], row.names = FALSE)
+```
+
+Line chart - Iteration 1
+====================================
+left: 55%
+incremental: false
+
+### Objective:
+Visualize increase of stores over time, by state
+
+```{r, eval = FALSE}
+# Not what we are expecting...
+ggplot(
+  aes(x = year,
+      y = stores),
+  data = summary) +
+  geom_line()
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = year,
+      y = stores),
+  data = summary) +
+  geom_line()
+```
+
+
+Line chart - Iteration 1
+====================================
+left: 55%
+incremental: false
+
+```{r, eval = FALSE}
+# Fix the code below to produce this plot
+ggplot(
+  aes(x = year,
+      y = stores),
+  data = summary) +
+  geom_line()
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state),
+  data = summary) +
+  geom_line()
+```
+
+Line chart - Iteration 1
+====================================
+left: 55%
+incremental: false
+
+```{r, eval = FALSE}
+# Fix the code below to produce this plot
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state),
+  data = summary) +
+  geom_line()
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state),
+  data = summary) +
+  geom_line()
+```
+
+Line chart - Iteration 2
+====================================
+left: 55%
+incremental: false
+
+```{r, eval = FALSE}
+# Edit code to change lines color depending on state
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state),
+  data = summary) +
+  geom_line()
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state,
+      color = state),
+  data = summary) +
+  geom_line(aes(group = state))
+```
+
+
+Line chart - Iteration 2
+====================================
+left: 55%
+incremental: false
+
+```{r, eval = FALSE}
+# Edit code to change lines color depending on state
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state,
+      color = state),
+  data = summary) +
+  geom_line()
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state,
+      color = state),
+  data = summary) +
+  geom_line(aes(group = state))
+```
+
+
+Line chart - Iteration 3
+====================================
+left: 55%
+
+```{r, eval = FALSE}
+# Edit the code to produce the following small multiple
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state,
+      color = state),
+  data = summary) +
+  geom_line()
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state,
+      color = state),
+  data = summary) +
+  geom_line(aes(group = state)) +
+  facet_wrap(~state) +
+  theme(legend.position = 'none')
+```
+
+
+Line chart - Iteration 4
+====================================
+left: 55%
+incremental: false
+
+```{r, eval = FALSE}
+# Edit the code to produce the following small multiple
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state,
+      color = state),
+  data = summary) +
+  geom_line() +
+  facet_wrap(~state)
+```
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(
+  aes(x = year,
+      y = stores,
+      group = state,
+      color = state),
+  data = summary) +
+  geom_line(aes(group = state)) +
+  facet_wrap(~state) +
+  theme(legend.position = 'none')
+```
+
+
+
+
+
+
+
