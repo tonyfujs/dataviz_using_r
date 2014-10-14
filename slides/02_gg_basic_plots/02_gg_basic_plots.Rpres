@@ -212,6 +212,52 @@ ggplot(
 ```
 
 
+Zoom In: The aes() function
+====================================
+type: zoom
+left: 55%
+incremental: false
+
+INSIDE aes() -> variables from dataset
+
+<pre><code class="r">
+ggplot(data = summary2005) +
+geom_point(<b>aes(</b>
+        x = population,
+        y = stores,
+        <b>size = market_share)</b>)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(data = summary2005) +
+  geom_point(aes(x = population, y = stores, size = market_share))
+```
+
+
+Zoom In: The aes() function
+====================================
+type: zoom
+left: 55%
+incremental: false
+
+OUTSIDE aes() -> fixed values
+
+<pre><code class="r">
+ggplot(data = summary2005) +
+geom_point(<b>aes(</b>
+        x = population,
+        y = stores<b>)</b>,
+        <b>size = 10</b>)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(data = summary2005) +
+  geom_point(aes(x = population, y = stores), size = 10)
+```
 
 Bar chart - Unordered
 ====================================

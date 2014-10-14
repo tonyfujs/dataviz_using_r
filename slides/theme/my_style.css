@@ -32,7 +32,7 @@ body {
 
 /*PRACTICE STYLE*/
 .practice .reveal .state-background {
-  background: #FFFFCC;
+  background: #FFFF99;
 } 
 
 .practice .reveal table{
@@ -50,6 +50,25 @@ body {
   font-weight: 200;
 }
 
+/*ZOOM IN style*/
+.zoom .reveal .state-background {
+  background: #99FF99;
+} 
+
+.zoom .reveal table{
+  color: black;
+}
+.zoom .reveal h1,
+.zoom .reveal h2,
+.zoom .reveal h3,
+.zoom .reveal li {
+	color: black;
+}
+
+.zoom .reveal p {
+  color: black;
+  font-weight: 200;
+}
 
 /*********************************************
  * HEADERS
