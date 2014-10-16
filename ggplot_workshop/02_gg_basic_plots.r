@@ -1,6 +1,3 @@
-### TO DO FIRST:
-# Set your working directory by clicking on: "Session" > "Set Working Directory" > "To Source File Location"
-
 ### Load libraries
 library(ggplot2)
 library(scales)

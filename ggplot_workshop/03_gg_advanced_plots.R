@@ -1,6 +1,3 @@
-### TO DO FIRST:
-# Set your working directory by clicking on: "Session" > "Set Working Directory" > "To Source File Location"
-
 ### Load libraries
 library(ggplot2)
 library(scales)
@@ -16,7 +13,7 @@ load('./data/data.Rdata')
 
 # Minard iteration 1: Plot troups location over time with a line
 ggplot() + 
-  geom_path(
+  geom_XXXX(
     aes(x = long, y = lat, group = group), 
     data = troops, 
     lineend = "round")
