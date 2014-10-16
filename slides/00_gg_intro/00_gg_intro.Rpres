@@ -90,7 +90,9 @@ incremental: false
 
 What is ggplot2?
 ========================================================
-* R package (Tool in the R toolbox)
+left: 70%
+
+* R package (An __app__ for your sma__R__t phone)
 * Rely on the Grammar of Graphics (gg)
 
 ***
