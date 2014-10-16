@@ -161,18 +161,45 @@ coord_polar()
 ![](../tof/plus.jpg)
 
 
+Zoom In: Layers
+====================================
+type: zoom
+
+Each __geom_XXXX__ represents a new layer
+* data
+* aesthetic mapping
+* position adjustment
+* statistical transformation
+* geometric object
+
+
+Zoom In: Layers
+====================================
+type: zoom
+
+That information can be provided in different ways:    
+
+<pre><code class="r">
+ggplot(<b>aes(x = population, y = stores), data = summary2005</b>) + 
+geom_point()   
+</code></pre>     
+
+<pre><code class="r">
+ggplot() + 
+geom_point(<b>aes(x = population, y = stores), data = summary2005</b>)
+</code></pre> 
+
 Bubble chart
 ====================================
 left: 55%
 
 <pre><code class="r">
 # Bubbles represent market_share 
-ggplot(
-  aes(x = population, 
-      y = stores,
-      <b>XXXX = market_share</b>),
-  data = summary2005) +
-  geom_point()
+ggplot(data = summary2005) +
+geom_point(aes(
+        x = population,
+        y = stores,
+        <b>XXXX = market_share)</b>)
 </code></pre>
 
 ***
@@ -193,12 +220,11 @@ incremental: false
 
 <pre><code class="r">
 # Bubbles represent market_share
-ggplot(
-  aes(x = population, 
-      y = stores,
-      <b>size = market_share</b>),
-  data = summary2005) +
-  geom_point()
+ggplot(data = summary2005) +
+geom_point(aes(
+        x = population,
+        y = stores,
+        <b>size = market_share)</b>)
 </code></pre>
 
 ***
@@ -654,6 +680,47 @@ ggplot(
 ```
 
 
+Zoom In: geom_path() vs geom_line()
+====================================
+type: zoom
+left: 55%
+incremental: false
+
+```{r, echo=FALSE}
+print(myear, row.names = FALSE)
+```
+<pre><code class="r">
+ggplot(myear, aes(length, rating)) +
+  <b>geom_line()</b>
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(myear, aes(length, rating)) +
+  geom_line()
+```
+
+Zoom In: geom_path() vs geom_line()
+====================================
+type: zoom
+left: 55%
+incremental: false
+
+```{r, echo=FALSE}
+print(myear, row.names = FALSE)
+```
+<pre><code class="r">
+ggplot(myear, aes(length, rating)) +
+  <b>geom_path()</b>
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(myear, aes(length, rating)) +
+  geom_path()
+```
 
 
 
