@@ -1,13 +1,13 @@
 ---
 title: "Basic plots"
 author: "Tony Fujs"
-date: "October 16th, 2014"
 output: rmarkdown::tufte_handout
 ---
 
 ```{r, echo = FALSE}
 load('../data/data.Rdata')
 library(ggplot2)
+library(scales)
 library(ggthemes)
 library(knitr)
 opts_chunk$set(cache=TRUE, warning = FALSE, message = FALSE)
@@ -26,12 +26,9 @@ ggplot(aes(x = population, y = stores), data = summary2005) + geom_point() + the
 ```
 .   
 .   
-.   
-.   
-.   
-.   
-.   
-.     
+.    
+.       
+
 ## Scatter Plot: Add regression line
 ```{r, eval=FALSE}
 ggplot(
@@ -43,16 +40,12 @@ ggplot(
 
 ```{r, echo = FALSE, fig.margin = TRUE}
 ggplot(aes(x = population, y = stores), data = summary2005) + geom_point() + geom_smooth() + theme_few()
-```
-    
+```    
 .   
 .   
-.   
-.   
-.   
-.   
-.   
-.     
+.    
+.       
+
 ## Bubble plot: Bubble size represents market_share
 ```{r, eval=FALSE}
 ggplot(data = summary2005) +
@@ -68,12 +61,29 @@ ggplot(data = summary2005) + geom_point(aes(x = population, y = stores, size = m
 ```
 .   
 .   
-.   
-.   
-.   
-.   
-.   
 .     
+.       
+    
+## Bar chart: ordered and flipped
+```{r, eval=FALSE}
+ggplot(
+  aes(x = reorder(state, population),
+      y = population),
+  data = summary2005) +
+  geom_bar(stat = 'identity') +
+  coord_XXXX
+```
+
+```{r, echo = FALSE, fig.margin = TRUE}
+# Bubbles represent market_share 
+ggplot(aes(x = reorder(state, population), y = population), data = summary2005) + 
+  geom_bar(stat = 'identity') + coord_flip() + theme_few()
+```
+.   
+.   
+.    
+.       
+
 ## Update the code so each bar represents the total population of the US for each year
 ```{r, eval=FALSE}
 ggplot(
@@ -86,16 +96,13 @@ geom_bar(stat = 'identity',
 
 ```{r, echo = FALSE, fig.margin = TRUE}
 ggplot(aes(x = factor(year), y = population), data = summary95_05) +
-  geom_bar(stat = 'identity', position = 'stack') + theme_few()
+  geom_bar(stat = 'identity', position = 'stack') + scale_y_continuous(labels = comma) + theme_few()
 ```
 .   
 .   
-.   
-.   
-.   
-.   
-.   
-.
+.    
+.       
+
 ## Fix the code below to produce this plot
 ```{r, eval=FALSE}
 ggplot(aes(x = year, y = stores), data = summary) +
@@ -108,12 +115,9 @@ ggplot(aes(x = year, y = stores, group = state), data = summary) +
 ```
 .   
 .   
-.   
-.   
-.   
-.   
-.  
-.
+.     
+.       
+
 ## Edit code to change lines color depending on state
 ```{r, eval=FALSE}
 ggplot(aes(x = year, y = stores, group = state), data = summary) +
@@ -126,12 +130,9 @@ ggplot(aes(x = year, y = stores, group = state, color = state), data = summary) 
 ```
 .   
 .   
-.   
-.   
-.   
-.   
 .    
-.
+.       
+
 ## Edit the code to produce the following small multiple
 ```{r, eval=FALSE}
 ggplot(aes(x = year, y = stores, group = state, color = state), data = summary) +
@@ -144,11 +145,8 @@ ggplot(aes(x = year, y = stores, group = state, color = state), data = summary) 
 ```
 .   
 .   
-.   
-.   
-.   
-.   
-.     
+.    
+.       
 
 [^tufte_latex]: https://code.google.com/p/tufte-latex/
 [^books_be]: http://www.edwardtufte.com/tufte/books_be
