@@ -1,0 +1,4 @@
+- Add exercise & explanation about aesthetics specifications in / out of the aes function
+- Add exercise about specification at the ggplot() or geom() level
+- trouver un bon example to explain geom_path()
+- Add crosstabs code on get_data slides
