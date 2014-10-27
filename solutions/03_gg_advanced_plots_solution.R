@@ -127,11 +127,6 @@ ggplot(aes(x = long, y = lat), data = walmart) +
 
 
 ### Walmart final: Short version of the code + customized scales
-# Define custom colors
-myPalette <- c('#1F78B4', '#FF0066')
-# Define custom transparency
-myAlpha <- c(.4, 0.7)	
-
 # Initialize ggplot and define default aesthetics and dataset
 p <- ggplot(aes(x = long, y = lat), data = walmart)
 # Draw US map
@@ -148,8 +143,6 @@ p <- p + coord_map()
 p <- p + facet_wrap(~year)
 p	
 
-myPalette <- c('#1F78B4', '#FF0066')
-myAlpha <- c(.4, 0.7)	
 
 
 

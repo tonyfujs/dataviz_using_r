@@ -6,7 +6,7 @@ transition-speed: slow
 width: 1440
 height: 900
 incremental: true
-date: June 5, 2014
+date: `r format(Sys.Date(), format="%B %d, %Y")`
 css: ../theme/my_style.css
 
 <small> Tony Fujs </small>
@@ -605,18 +605,560 @@ Minard: Final
 ![](../tof/minard_map_gg.png)
 
 
+Walmart: US map data
+====================================
+incremental: false
+
+```{r, echo = FALSE}
+print(us[1:10 , 1:5], row.names = FALSE)
+```
+
+Walmart: Stores data
+====================================
+incremental: false
+
+```{r, echo = FALSE}
+print(walmart[1:10 , 1:5], row.names = FALSE)
+```
+
+Walmart: Quick look
+====================================
+type: practice
+incremental: false
+left: 55%
+
+Geographical information
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_point()
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_point()
+```
+
+Walmart: Iteration 1
+====================================
+incremental: false
+left: 55%
+
+Initialize default ggplot & draw US map
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  <b>geom_XXXX</b>(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3")
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3")
+```
 
 
+Walmart: Iteration 1
+====================================
+incremental: false
+left: 55%
+
+Initialize default ggplot & draw US map
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  <b>geom_polygon</b>(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3")
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3")
+```
+
+Walmart: Iteration 2
+====================================
+incremental: false
+left: 55%
+
+Add points representing walmart stores
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+	<b>????</b>
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+	geom_point()
+```
 
 
+Walmart: Iteration 2
+====================================
+incremental: false
+left: 55%
+
+Add points representing walmart stores
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+  <b>geom_point()</b>
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+	geom_point()
+```
 
 
+Walmart: Iteration 3
+====================================
+incremental: false
+left: 55%
+
+Change point color if NEW store
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+	geom_point()
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = new))
+```
 
 
+Walmart: Iteration 3
+====================================
+incremental: false
+left: 55%
+
+Change point color if NEW store
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+  geom_point(<b>aes(color = new)</b>)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = new))
+```
 
 
+Walmart: Iteration 4
+====================================
+incremental: false
+left: 55%
+
+Make sure geographic proportion are respected
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+	geom_point(aes(color = new))
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+	geom_point(aes(color = new)) +
+	coord_map()
+```
 
 
+Walmart: Iteration 4
+====================================
+incremental: false
+left: 55%
+
+Make sure geographic proportion are respected
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = new)) +
+	<b>coord_map()</b>
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+	geom_point(aes(color = new)) +
+	coord_map()
+```
 
 
+Walmart: Iteration 5
+====================================
+incremental: false
+left: 55%
 
+Create a small multiple (ONE chart per year)
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+	geom_point(aes(color = new)) +
+	coord_map()
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+	geom_point(aes(color = new)) +
+	coord_map() +
+	facet_wrap(~year)
+```
+
+
+Walmart: Iteration 5
+====================================
+incremental: false
+left: 55%
+
+Create a small multiple (ONE chart per year)
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = new)) +
+	coord_map() +
+	<b>facet_wrap(~year)</b>
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+	geom_point(aes(color = new)) +
+	coord_map() +
+	facet_wrap(~year)
+```
+
+
+Walmart: Iteration 6
+====================================
+incremental: false
+left: 55%
+
+Deal with overplotting (add transparency)
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+	geom_point(aes(color = new)) +
+	coord_map() +
+	facet_wrap(~year)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = new, alpha = new)) +
+	coord_map() +
+	facet_wrap(~year)
+```
+
+
+Walmart: Iteration 6
+====================================
+incremental: false
+left: 55%
+
+Deal with overplotting (add transparency)
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = new, 
+              <b>alpha = new</b>)) +
+	coord_map() +
+	facet_wrap(~year)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = new, alpha = new)) +
+	coord_map() +
+	facet_wrap(~year)
+```
+
+
+Walmart: Iteration 7
+====================================
+incremental: false
+left: 55%
+
+Deal with "new" treated as continuous
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+	geom_point(aes(color = new, 
+                alpha = new)) +
+	coord_map() +
+	facet_wrap(~year)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+	geom_point(aes(color = factor(new), alpha = factor(new))) +
+	coord_map() +
+	facet_wrap(~year)
+```
+
+
+Walmart: Iteration 7
+====================================
+incremental: false
+left: 55%
+
+Deal with "new" treated as continuous
+
+<pre><code class="r">
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+  geom_point(aes(<b>color = factor(new),
+                alpha = factor(new)</b>)) +
+	coord_map() +
+	facet_wrap(~year)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+	geom_point(aes(color = factor(new), alpha = factor(new))) +
+	coord_map() +
+	facet_wrap(~year)
+```
+
+
+Walmart: Iteration 8
+====================================
+incremental: false
+left: 55%
+
+Customize transparency
+
+<pre><code class="r">
+<b>myAlpha <- c(.4, 0.7)</b> 
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = factor(new), 
+                alpha = factor(new))) +
+  coord_map() +
+  facet_wrap(~year)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+myAlpha <- c(.4, 0.7)  
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = factor(new), alpha = factor(new))) +
+  coord_map() +
+  scale_alpha_manual(values = myAlpha, guide = 'none') +
+  facet_wrap(~year)
+```
+
+
+Walmart: Iteration 8
+====================================
+incremental: false
+left: 55%
+
+Customize transparency
+
+<pre><code class="r">
+<b>myAlpha <- c(.4, 0.7)</b> 
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = factor(new), 
+                alpha = factor(new))) +
+  coord_map() +
+  <b>scale_alpha_manual(values = myAlpha, 
+                        guide = 'none')</b> +
+  facet_wrap(~year)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+myAlpha <- c(.4, 0.7)  
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = factor(new), alpha = factor(new))) +
+  coord_map() +
+  scale_alpha_manual(values = myAlpha, guide = 'none') +
+  facet_wrap(~year)
+```
+
+
+Walmart: Iteration 9
+====================================
+incremental: false
+left: 55%
+
+Customize colors
+
+<pre><code class="r">
+<b>myPalette <- c('#1F78B4', '#FF0066')</b> 
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = factor(new),
+                alpha = factor(new))) +
+  coord_map() +
+  scale_alpha_manual(values = myAlpha, 
+                  guide = 'none') +
+  facet_wrap(~year)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+myAlpha <- c(.4, 0.7)
+myPalette <- c('#1F78B4', '#FF0066')
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = factor(new), alpha = factor(new))) +
+  coord_map() +
+  scale_alpha_manual(values = myAlpha, guide = 'none') +
+  scale_colour_manual(values = myPalette, guide = 'none') +
+  facet_wrap(~year)
+```
+
+
+Walmart: Iteration 9
+====================================
+incremental: false
+left: 55%
+
+Customize colors
+
+<pre><code class="r">
+<b>myPalette <- c('#1F78B4', '#FF0066')</b> 
+ggplot(aes(x = long, y = lat), 
+  data = walmart) +
+  geom_polygon(aes(group = group), 
+  data = us, 
+  colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = factor(new), 
+                alpha = factor(new))) +
+  coord_map() +
+  scale_alpha_manual(values = myAlpha, 
+                    guide = 'none') +
+  <b>scale_colour_manual(
+    values = myPalette,
+    guide = 'none')</b> +
+  facet_wrap(~year)
+</code></pre>
+
+***
+
+```{r, echo = FALSE, out.height = 700, out.width = 700}
+myAlpha <- c(.4, 0.7)
+myPalette <- c('#1F78B4', '#FF0066')
+ggplot(aes(x = long, y = lat), data = walmart) +
+  geom_polygon(aes(group = group), data = us, colour="black", fill="#F7F3F3") +
+  geom_point(aes(color = factor(new), alpha = factor(new))) +
+  coord_map() +
+  scale_alpha_manual(values = myAlpha, guide = 'none') +
+  scale_colour_manual(values = myPalette, guide = 'none') +
+  facet_wrap(~year)
+```
+
+
+Walmart: Final
+====================================
+
+![](../tof/map_small.png)
