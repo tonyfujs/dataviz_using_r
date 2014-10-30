@@ -1105,7 +1105,7 @@ df &lt;- read.dta(&#39;./data/Alabama.dta&#39;)
 
 </section>
 <section data-transition="default" data-transition-speed="slow">
-<h3>Get data: Quick pick</h3>
+<h3>Get data: Quick look</h3>
 <div class="slideContent" >
 <pre><code class="r">head(df)
 
@@ -1116,7 +1116,7 @@ df &lt;- read.dta(&#39;./data/Alabama.dta&#39;)
 
 </section>
 <section data-transition="default" data-transition-speed="slow">
-<h3>Get data: Quick pick</h3>
+<h3>Get data: Quick look</h3>
 <div class="slideContent" >
 <pre><code class="r">head(df, 10)
 
@@ -1127,7 +1127,7 @@ df &lt;- read.dta(&#39;./data/Alabama.dta&#39;)
 
 </section>
 <section data-transition="default" data-transition-speed="slow">
-<h3>Get data: Quick pick</h3>
+<h3>Get data: Quick look</h3>
 <div class="slideContent" >
 <pre><code class="r">summary(df)
 
@@ -1138,7 +1138,7 @@ df &lt;- read.dta(&#39;./data/Alabama.dta&#39;)
 
 </section>
 <section data-transition="default" data-transition-speed="slow">
-<h3>Get data: Quick pick</h3>
+<h3>Get data: Quick look</h3>
 <div class="slideContent" >
 <pre><code class="r">str(df)
 
@@ -1149,7 +1149,7 @@ df &lt;- read.dta(&#39;./data/Alabama.dta&#39;)
 
 </section>
 <section data-transition="default" data-transition-speed="slow">
-<h3>Get data: Quick pick</h3>
+<h3>Get data: Quick look</h3>
 <div class="slideContent" >
 <pre><code class="r">View(df)
 
@@ -1160,10 +1160,129 @@ df &lt;- read.dta(&#39;./data/Alabama.dta&#39;)
 
 </section>
 <section data-transition="default" data-transition-speed="slow">
+<h3>Get data: Indexing</h3>
+<div class="slideContent" >
+<pre><code class="r">df &lt;- mtcars
+df
+# Using row / column number
+df[1, ] # First row
+df[ ,1] # First column
+df[1, 1] # Top left cell
+df[1:5, ] # First five rows
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="slow">
+<h3>Get data: Indexing continued</h3>
+<div class="slideContent" >
+<pre><code class="r"># Using column names
+df[ , &#39;mpg&#39;] # First column
+df[, c(&#39;gear&#39;, &#39;cyl&#39;)] # First 2 columns
+df[&#39;Valiant&#39;, ] # Also works for rows
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="slow">
+<h3>Get data: Crosstabs</h3>
+<div class="slideContent" >
+<pre><code class="r"># ftable command
+ftable(df[, c(&#39;gear&#39;, &#39;cyl&#39;)])
+ftable(df[, c(&#39;gear&#39;, &#39;cyl&#39;, &#39;carb&#39;)])
+my_table &lt;- ftable(df[, c(&#39;gear&#39;, &#39;cyl&#39;, &#39;carb&#39;)])
+my_table
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="slow">
+<h3>Get data: Crosstabs continued</h3>
+<div class="slideContent" >
+<pre><code class="r">library(gmodels)
+CrossTable(df$gear, df$cyl)
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="slow">
+<h3>END</h3>
+<div class="slideContent" >
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="slow">
+<h3>Get data: Crosstabs continued</h3>
+<div class="slideContent" >
+<pre><code class="r">prop.table(my_table) # cell percentages
+prop.table(my_table, 1) # row percentages 
+prop.table(my_table, 2) # column percentages
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="slow">
+<h3>END</h3>
+<div class="slideContent" >
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="slow">
 <h3>Get data: Quick pick</h3>
 <div class="slideContent" >
-<pre><code class="r">table(df$pre, df$post)
+<pre><code class="r">df &lt;- esoph
+xtabs(~ alcgp, data = df)
+xtabs(~ alcgp + tobgp, data = df)
+my_table &lt;- xtabs(ncases ~ alcgp + tobgp, data = df)
+my_table
 
+# Crosstabs
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="slow">
+<h3>Get data: Quick pick</h3>
+<div class="slideContent" >
+<pre><code class="r">margin.table(my_table, 1) # rows total 
+margin.table(my_table, 2) # columns total
+prop.table(my_table) # cell percentages
+prop.table(my_table, 1) # row percentages 
+prop.table(my_table, 2) # column percentages
+
+# Crosstabs continued
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="slow">
+<h3>Get data: Quick pick</h3>
+<div class="slideContent" >
+<pre><code class="r">library(gmodels)
+CrossTable(df$alcgp, df$tobgp)
+
+# Crosstabs continued
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="default" data-transition-speed="slow">
+<h3>Get data: Quick pick</h3>
+<div class="slideContent" >
+<pre><code class="r">df &lt;- esoph
+table(df$alcgp)
+table(df$alcgp, df$tobgp)
+summary(cars)
 
 # Crosstabs
 </code></pre>

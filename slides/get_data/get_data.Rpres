@@ -109,7 +109,7 @@ library(foreign)
 df <- read.dta('./data/Alabama.dta')
 ```
 
-Get data: Quick pick
+Get data: Quick look
 ========================================================
 incremental: false
 
@@ -119,7 +119,7 @@ head(df)
 # Get first 6 rows
 ```
 
-Get data: Quick pick
+Get data: Quick look
 ========================================================
 incremental: false
 
@@ -129,7 +129,7 @@ head(df, 10)
 # Get first 10 rows
 ```
 
-Get data: Quick pick
+Get data: Quick look
 ========================================================
 incremental: false
 
@@ -139,7 +139,7 @@ summary(df)
 # Summary stats
 ```
 
-Get data: Quick pick
+Get data: Quick look
 ========================================================
 incremental: false
 
@@ -149,7 +149,7 @@ str(df)
 # Object structure
 ```
 
-Get data: Quick pick
+Get data: Quick look
 ========================================================
 incremental: false
 
@@ -159,13 +159,122 @@ View(df)
 # Object structure
 ```
 
+Get data: Indexing
+========================================================
+incremental: false
+
+```{r, eval=FALSE}
+df <- mtcars
+df
+# Using row / column number
+df[1, ] # First row
+df[ ,1] # First column
+df[1, 1] # Top left cell
+df[1:5, ] # First five rows
+```
+
+Get data: Indexing continued
+========================================================
+incremental: false
+
+```{r, eval=FALSE}
+# Using column names
+df[ , 'mpg'] # First column
+df[, c('gear', 'cyl')] # First 2 columns
+df['Valiant', ] # Also works for rows
+```
+
+Get data: Crosstabs
+========================================================
+incremental: false
+
+```{r, eval=FALSE}
+# ftable command
+ftable(df[, c('gear', 'cyl')])
+ftable(df[, c('gear', 'cyl', 'carb')])
+my_table <- ftable(df[, c('gear', 'cyl', 'carb')])
+my_table
+```
+
+Get data: Crosstabs continued
+========================================================
+incremental: false
+
+```{r, eval=FALSE}
+library(gmodels)
+CrossTable(df$gear, df$cyl)
+```
+
+
+END
+========================================================
+incremental: false
+
+
+Get data: Crosstabs continued
+========================================================
+incremental: false
+
+```{r, eval=FALSE}
+prop.table(my_table) # cell percentages
+prop.table(my_table, 1) # row percentages 
+prop.table(my_table, 2) # column percentages
+```
+
+END
+========================================================
+incremental: false
+
+
+
 Get data: Quick pick
 ========================================================
 incremental: false
 
 ```{r, eval=FALSE}
-table(df$pre, df$post)
+df <- esoph
+xtabs(~ alcgp, data = df)
+xtabs(~ alcgp + tobgp, data = df)
+my_table <- xtabs(ncases ~ alcgp + tobgp, data = df)
+my_table
 
+# Crosstabs
+```
+
+Get data: Quick pick
+========================================================
+incremental: false
+
+```{r, eval=FALSE}
+margin.table(my_table, 1) # rows total 
+margin.table(my_table, 2) # columns total
+prop.table(my_table) # cell percentages
+prop.table(my_table, 1) # row percentages 
+prop.table(my_table, 2) # column percentages
+
+# Crosstabs continued
+```
+
+Get data: Quick pick
+========================================================
+incremental: false
+
+```{r, eval=FALSE}
+library(gmodels)
+CrossTable(df$alcgp, df$tobgp)
+
+# Crosstabs continued
+```
+
+Get data: Quick pick
+========================================================
+incremental: false
+
+```{r, eval=FALSE}
+df <- esoph
+table(df$alcgp)
+table(df$alcgp, df$tobgp)
+summary(cars)
 
 # Crosstabs
 ```
